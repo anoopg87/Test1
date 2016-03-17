@@ -22,9 +22,13 @@ public class ViewPagerFragment extends Fragment {
     String fragmentPosition="";
     FrameLayout mFrameLayout;
     ViewGroup container;
+
+    // Singletone class which returns the same class object
     public static ViewPagerFragment newInstance(String fragmentName,int postion) {
         Bundle args = new Bundle();
          ViewPagerFragment fragment = new ViewPagerFragment();
+
+        // adding args to fragment
         args.putString(NAME,fragmentName);
         args.putString(POSTION,String.valueOf(postion));
         fragment.setArguments(args);

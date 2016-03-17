@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int themeColor=R.color.colorPrimary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+// setting theme according to the app preference
         setApplicationTheme();
 
         super.onCreate(savedInstanceState);
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setApplicationTheme(){
+
+        // check the app preference for the selected theme and setting it to the activity
         if(SharedPref.getTheme(MainActivity.this).equals(AppTheme.BLUE)){
             setTheme(R.style.AppTheme_blue);
             themeColor=R.color.colorPrimary;
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              mTabLayout.addTab(mTabLayout.newTab().setText(str));
         }
 
+
+        // setting the tab0 as the default selected tab
         if(mTabLayout.getTabCount()>=0) {
             mTabLayout.getTabAt(0).select();
             ((TextView)findViewById(R.id.seletedItem)).setText(mItemList.get(0));
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
+                // showing the selected tab info
                 ((TextView) findViewById(R.id.seletedItem)).setText(mItemList.get(tab.getPosition()));
             }
 
@@ -107,15 +112,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void loadViewPager(){
+
+        // loading view pagers
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new ViewPageAdaper(getSupportFragmentManager()));
 
+
+        // pager indicator
         CirclePageIndicator indicator = (CirclePageIndicator)
                 findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
         indicator.setSnap(true);
         indicator.setFillColor(getResources().getColor(themeColor));
         final float density = getResources().getDisplayMetrics().density;
+        // setting the size of indicator
         indicator.setRadius(5 * density);
 
     }
@@ -124,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        // click listeners for the theme buttons
         switch (v.getId()){
             case R.id.redButton:
                 if(!SharedPref.getTheme(MainActivity.this).equals(AppTheme.RED)) {
